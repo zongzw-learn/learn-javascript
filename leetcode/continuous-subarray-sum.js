@@ -58,7 +58,7 @@ var checkSubarraySum = function (nums, k) {
         nums[i] += nums[i - 1];
         var m = nums[i] % k;
 
-        if (typeof h[m] != 'undefined') {
+        if (h[m] != undefined) {
             if (i - h[m] > 1) {
                 return true;
             }
@@ -67,6 +67,7 @@ var checkSubarraySum = function (nums, k) {
             h[m] = i;
         }
     }
+
     return false;
 };
 
