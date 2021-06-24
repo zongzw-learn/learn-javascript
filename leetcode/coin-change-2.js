@@ -46,6 +46,26 @@
  * @param {number[]} coins
  * @return {number}
  */
- var change = function(amount, coins) {
+var change = function (amount, coins) {
 
+    // var combines = []
+    var hash_combines = {}
+    function findSubGroup(subAmount, combines, coinIndex) {
+        var i = coinIndex;
+        for (; i < coins.length; i++) {
+            if (subAmount - coins[i] > 0) {
+                findSubGroup(subAmount - coins[i], [...combines, coins[i]], i);
+                findSubGroup(subAmount - coins[i], [...combines, coins[i]], i + 1);
+            } else if (subAmount - coins[i] == 0) {
+                hash_combines[[...combines, coins[i]].join(',')] = 0;
+                return;
+            }
+        }
+    }
+
+    findSubGroup(amount, [], 0);
+
+    Object.keys(hash_combines).forEach(k => { console.log(k)});
 };
+
+change(15, [1, 2, 5])
